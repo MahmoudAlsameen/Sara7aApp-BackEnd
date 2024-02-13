@@ -12,10 +12,15 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+// Morgan logging
 if (envMorganLogging) {
   app.use(morgan(envMorganLogging));
   console.log(`Morgan_Logging mode: ${envMorganLogging}`);
 }
+
+app.use("/api/user", userRoutes);
+app.use("/api/message", messageRoutes);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on the server`, 404));

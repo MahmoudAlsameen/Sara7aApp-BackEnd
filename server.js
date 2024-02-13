@@ -8,8 +8,8 @@ load_env();
 const port = process.env.PORT || 4750;
 const envMorganLogging = process.env.MORGAN_LOGGING;
 const server = express();
-server.use(cors());
 
+server.use(cors());
 server.use(express.json());
 if (envMorganLogging) {
   server.use(morgan(envMorganLogging));

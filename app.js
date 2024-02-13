@@ -2,6 +2,8 @@ import cors from "cors";
 import express from "express";
 import morgan from "morgan";
 
+import globalErrorHandler from "./middleware/errorMiddleware.js";
+import AppError from "./utils/appError.js";
 import { load_env } from "./utils/load.env.js";
 
 load_env();
@@ -15,11 +17,9 @@ if (envMorganLogging) {
   console.log(`Morgan_Logging mode: ${envMorganLogging}`);
 }
 
-app.all("*", (req, res) => {
-  res.status(404).json({
-    status: "fail",
-    message: `Can't find ${req.originalUrl} on the server`,
-  });
+app.all("*", (req, res, next) => {
+  next(new AppError(`Can't find ${req.originalUrl} on the server`, 404));
 });
 
+app.use(globalErrorHandler);
 export default app;

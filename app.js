@@ -3,6 +3,8 @@ import express from "express";
 import morgan from "morgan";
 
 import globalErrorHandler from "./middleware/errorMiddleware.js";
+import messageRoutes from "./routes/messageRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import AppError from "./utils/appError.js";
 import { load_env } from "./utils/load.env.js";
 

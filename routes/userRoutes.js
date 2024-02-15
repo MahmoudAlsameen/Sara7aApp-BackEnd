@@ -7,7 +7,11 @@ import {
 import validation from "./../middleware/validation.js";
 const userRoutes = express.Router();
 
-userRoutes.post("/register", validation(userRegisterSchema), userRegister);
-userRoutes.post("/login", validation(userLoginSchema), userLogin);
+userRoutes.post(
+  "/register",
+  validation(userRegisterSchema, "body"),
+  userRegister
+);
+userRoutes.post("/login", validation(userLoginSchema, "body"), userLogin);
 
 export default userRoutes;

@@ -15,7 +15,7 @@ const sendErrorProd = (err, res) => {
     });
   } else {
     console.error("ERROR: ", err);
-    res.sattus(500).json({
+    res.status(500).json({
       status: "error",
       message: "Something went wrong",
     });
@@ -26,10 +26,13 @@ const globalErrorHandler = (err, req, res, next) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 
-  if (process.env.NODE_ENV === "dev") {
-    sendErrorDev(err, res);
-  } else if (process.env.NODE_ENV === "prod") {
-    sendErrorProd(err, res);
+  switch (process.env.NODE_ENV) {
+    case "production":
+      sendErrorProd(err, res);
+      break;
+    default:
+      sendErrorDev(err, res);
+      break;
   }
 };
 

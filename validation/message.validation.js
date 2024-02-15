@@ -1,7 +1,7 @@
 import Joi from "joi";
 
 const messageValidationSchema = Joi.object({
-  messageContent: Joi.string().required().min(3).messages({
+  messageText: Joi.string().required().min(3).messages({
     "any.required": "Message content is required",
     "string.min": "Message must be at least 3 characters long",
   }),

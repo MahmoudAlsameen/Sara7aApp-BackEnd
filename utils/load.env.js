@@ -13,7 +13,7 @@ export const load_env = function () {
       };
       break;
     case "test":
-      configPath = "config/.env.prod";
+      configPath = "config/.env.test";
       result = dotenv.config({ path: configPath });
       process.env = {
         ...process.env,
